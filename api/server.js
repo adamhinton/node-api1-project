@@ -18,6 +18,22 @@ server.get("/api/users", (req, res) => {
     });
 });
 
+// id is different every time you reaload the page
+server.get("/api/users/:id", (req, res) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      // console.log(users);
+      res.json(user);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: "error getting user",
+        err: err.message,
+        stack: err.stack,
+      });
+    });
+});
+
 server.use("*", (req, res) => {
   res.status(404).json({
     message: "not found A",
