@@ -22,7 +22,11 @@ server.get("/api/users", (req, res) => {
 server.get("/api/users/:id", (req, res) => {
   User.findById(req.params.id)
     .then((user) => {
-      // console.log(users);
+      !user
+        ? res
+            .status(404)
+            .json({ message: "The user with the specified ID does not exist" })
+        : console.log("user found?", user);
       res.json(user);
     })
     .catch((err) => {
