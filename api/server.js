@@ -34,7 +34,6 @@ server.put("/api/users/:id", async (req, res) => {
 server.delete("/api/users/:id", async (req, res) => {
   try {
     const possibleUser = await User.findById(req.params.id);
-    console.log("possible user:", possibleUser);
     if (!possibleUser) {
       res
         .status(404)
@@ -89,7 +88,7 @@ server.get("/api/users", (req, res) => {
     });
 });
 
-// id is different every time you reaload the page
+// id is different every time you reload the page
 server.get("/api/users/:id", (req, res) => {
   User.findById(req.params.id)
     .then((user) => {
